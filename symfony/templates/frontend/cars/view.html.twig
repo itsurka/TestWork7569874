@@ -1,0 +1,9 @@
+{% extends 'frontend/base.html.twig' %}
+
+{% block title %}Hello CarsController!{% endblock %}
+
+{% block body %}
+    <p>ID: {{ car.id }}</p>
+    <p>Title: {{ car.title }}</p>
+    <p>Brand: {{ car.brand.title }} {{ car.brandModel.title }}</p>
+{% endblock %}

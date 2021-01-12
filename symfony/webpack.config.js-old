@@ -1,0 +1,55 @@
+var Encore = require('@symfony/webpack-encore');
+
+// Manually configure the runtime environment if not already configured yet by the "encore" command.
+// It's useful when you use tools that rely on webpack.config.js file.
+if (!Encore.isRuntimeEnvironmentConfigured()) {
+    Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');
+}
+
+Encore
+    .setOutputPath('public/build/frontend/')
+    .setPublicPath('/build/frontend')
+    .addEntry('frontend_require', './public/assets/js/frontend/import.js')
+    .addEntry('frontend_main', './public/assets/js/frontend/main.js')
+    /*.addStyleEntry('global', './assets/css/global.scss')*/
+    /*.enableSassLoader()*/
+    .autoProvidejQuery()
+    .enableSourceMaps(!Encore.isProduction())
+    .enableSingleRuntimeChunk()
+;
+
+// build the first configuration
+const firstConfig = Encore.getWebpackConfig();
+
+// Set a unique name for the config (needed later!)
+firstConfig.name = 'frontendConfig';
+
+// reset Encore to build the second config
+Encore.reset();
+
+// define the second configuration
+Encore
+    .setOutputPath('public/build/backend/')
+    .setPublicPath('/build/backend')
+    .addEntry('backend', './public/assets/js/backend.js')
+    .copyFiles({
+        from: './assets/dist/img',
+        pattern: /\.(png|jpg|jpeg)$/,
+        // to path is relative to the build directory
+        to: 'dist/img/[path][name].[ext]'
+    })
+    /*.addStyleEntry('backend', './assets/css/mobile.less')*/
+    /*.enableLessLoader()*/
+    .autoProvidejQuery()
+    .enableSourceMaps(!Encore.isProduction())
+    .enableSingleRuntimeChunk()
+;
+
+// build the second configuration
+const secondConfig = Encore.getWebpackConfig();
+
+// Set a unique name for the config (needed later!)
+secondConfig.name = 'backendConfig';
+
+// export the final configuration as an array of multiple configurations
+module.exports = [firstConfig, secondConfig];

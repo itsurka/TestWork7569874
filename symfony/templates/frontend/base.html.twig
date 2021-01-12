@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% block stylesheets %}
+            {#<link media="all" type="text/css" rel="stylesheet" href="{{ asset('/assets/bootstrap-4.5.2/dist/css/bootstrap.css') }}">#}
+            {#{{ encore_entry_link_tags('frontend') }}#}
+            {{ encore_entry_link_tags('frontend_require', null, 'frontendConfig') }}
+            {{ encore_entry_link_tags('frontend_main', null, 'frontendConfig') }}
+        {% endblock %}
+    </head>
+    <body>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                {% embed 'frontend/blocks/header.html.twig' %}{% endembed %}
+            </div>
+            <div class="col-3">
+                {% embed 'frontend/blocks/sidebar.html.twig' %}{% endembed %}
+            </div>
+            <div class="col-9">
+                {% block body %}{% endblock %}
+            </div>
+            <div class="col-12">
+                {% embed 'frontend/blocks/footer.html.twig' %}{% endembed %}
+            </div>
+        </div>
+    </div>
+    <script>
+        window.api = {
+            urls: {
+                cars: {
+                    brandModels: "/api/cars/brands/%s/models"
+                }
+            }
+        };
+    </script>
+    {% block javascripts %}
+        {#<script src="{{ asset('/assets/bootstrap-4.5.2/dist/js/bootstrap.js') }}"></script>#}
+        {{ encore_entry_script_tags('frontend_require', null, 'frontendConfig') }}
+        {{ encore_entry_script_tags('frontend_main', null, 'frontendConfig') }}
+    {% endblock %}
+    </body>
+</html>

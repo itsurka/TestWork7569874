@@ -1,0 +1,20 @@
+car:
+  title: Заголовок
+  description: Описание
+  prod_year: Год
+  body_type: Кузов
+  seats: Кол-во мест
+  fuel: Топливо
+  engine_capacity: Объем
+  gearbox_type: Коробка
+  wheel_drive: Привод
+  odometer: Пробег
+  city: Город
+  brand: Марка
+  brand_model: Модель
+  images: Фотографии
+
+form:
+  save: Сохранить
+  choose_option: Выберите
+

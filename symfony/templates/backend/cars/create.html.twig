@@ -1,0 +1,22 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block title %}Create Car{% endblock %}
+{% block page_title %}Create Car{% endblock %}
+
+{% block body %}
+
+    <div class="card">
+        <div class="card-body">
+            {{ form_start(form) }}
+
+            <div class="form-group">
+                <input type="submit" class="btn btn-success" value="Create">
+            </div>
+
+            {{ form_end(form) }}
+        </div>
+        <!-- /.card-body -->
+    </div>
+
+
+{% endblock %}

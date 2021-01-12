@@ -1,0 +1,86 @@
+{% extends 'frontend/base.html.twig' %}
+
+{% block title %}Hello ProfileController!{% endblock %}
+
+{% block body %}
+
+    {{ form_start(form) }}
+
+    <div class="my-custom-class-for-errors">
+        {{ form_errors(form) }}
+    </div>
+
+    <div class="row">
+        <div class="col">
+            {{ form_row(form.title) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            {{ form_row(form.description) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-3">
+            {{ form_row(form.prod_year) }}
+        </div>
+        <div class="col-3">
+            {{ form_row(form.brand) }}
+        </div>
+        <div class="col-3">
+            {{ form_row(form.brand_model) }}
+        </div>
+        <div class="col-3">
+            {{ form_row(form.gearbox_type) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-3">
+            {{ form_row(form.body_type) }}
+        </div>
+        <div class="col-3">
+            {{ form_row(form.seats) }}
+        </div>
+        <div class="col-3">
+            {{ form_row(form.fuel) }}
+        </div>
+        <div class="col-3">
+            {{ form_row(form.engine_capacity) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-3">
+            {{ form_row(form.wheel_drive) }}
+        </div>
+        <div class="col-3">
+            {{ form_row(form.odometer) }}
+        </div>
+        <div class="col-6">
+            {{ form_row(form.city) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <div class="dropzone dropzone-previews" id="my-awesome-dropzone">
+                    <div class="dz-message" data-dz-message><span>Добавить фотографии</span></div>
+                </div>
+                <div class="car_files" style="display: block; border: 1px solid red">Files:</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            {{ form_row(form.save) }}
+        </div>
+    </div>
+
+    {{ form_end(form) }}
+
+{% endblock %}

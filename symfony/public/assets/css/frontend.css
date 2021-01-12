@@ -1,0 +1,7 @@
+body {
+    background-color: lightgray;
+}
+
+.dropzone .dz-preview.dz-error .dz-error-message {
+    top: 150px;
+}

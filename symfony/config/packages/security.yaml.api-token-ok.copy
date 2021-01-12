@@ -1,0 +1,85 @@
+security:
+    encoders:
+        App\Entity\User:
+            algorithm: auto
+
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email
+        access_token_provider:
+            entity:
+                class: App\Entity\AccessToken
+                property: token
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        backend:
+#            anonymous: true
+            pattern: ^/backend
+            lazy: true
+            provider: app_user_provider
+            guard:
+                authenticators:
+                    - App\Security\BackendLoginFormAuthenticator
+            logout:
+                path: backend_logout
+                # where to redirect after logout
+                # target: app_any_route
+
+            # activate different ways to authenticate
+            # https://symfony.com/doc/current/security.html#firewalls-authentication
+
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            # switch_user: true
+        frontend:
+            #            anonymous: true
+            pattern: ^/(?!api)
+            lazy: true
+            provider: app_user_provider
+            guard:
+                authenticators:
+                    - App\Security\FrontendLoginFormAuthenticator
+            logout:
+                path: frontend_logout
+                # where to redirect after logout
+                # target: app_any_route
+
+        rest_login:
+#            pattern: ^/(?!api/profile)
+            lazy: true
+            provider: app_user_provider
+            json_login:
+                check_path: /api/auth/access-token
+                username_path: user.email
+                password_path: user.password
+            guard:
+                authenticators:
+                    - App\Security\RestLoginAuthenticator
+            logout:
+                path: frontend_logout
+
+#        rest_access:
+#            lazy: true
+#            logout: ~
+#            provider: access_token_provider
+#            pattern: ^/api/profile
+#            guard:
+#                authenticators:
+#                    - App\Security\RestAccessTokenAuthenticator
+
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+         - { path: ^/backend/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/backend, roles: ROLE_ADMIN }
+         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/profile, roles: ROLE_USER }
+
+    enable_authenticator_manager: true

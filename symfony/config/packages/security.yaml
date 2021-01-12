@@ -1,0 +1,40 @@
+security:
+    encoders:
+        App\Entity\User:
+            algorithm: auto
+
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        api:
+            stateless: true
+            provider: app_user_provider
+            pattern: ^/api/profile
+            guard:
+                authenticators:
+                    - App\Security\ApiAuthenticator
+
+        api_login:
+            pattern: ^/api/auth/login
+            lazy: true
+            provider: app_user_provider
+            json_login:
+                check_path: /api/auth/login
+                username_path: email
+                password_path: password
+
+    access_control:
+         - { path: ^/api/auth/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/api/profile, roles: ROLE_USER }
+         - { path: ^/api/cars, roles: ROLE_USER }
+
+    enable_authenticator_manager: true

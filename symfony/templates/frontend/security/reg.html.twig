@@ -1,0 +1,11 @@
+{% extends 'frontend/base.html.twig' %}
+
+{% block title %}Reg{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+    <div class="form-group">
+        <input type="submit" class="btn btn-success" value="Create">
+    </div>
+    {{ form_end(form) }}
+{% endblock %}

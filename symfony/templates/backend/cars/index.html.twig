@@ -1,0 +1,33 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block title %}Cars{% endblock %}
+{% block page_title %}Cars{% endblock %}
+
+{% block body %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Model</th>
+            <th>Created</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if paginator.count() %}
+            {% for car in paginator.getIterator() %}
+                <tr>
+                    <td>{{ car.id }}</td>
+                    <td>{{ car.title }}</td>
+                    <td>{{ car.brand.title }} {{ car.brandModel.title }}</td>
+                    <td>{{ car.createdAt|date('Y-m-d H:i') }}</td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="4">No data</td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

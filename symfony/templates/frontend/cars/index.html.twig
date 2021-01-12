@@ -1,0 +1,45 @@
+{% extends 'frontend/base.html.twig' %}
+
+{% block title %}Hello CarsController!{% endblock %}
+
+{% block body %}
+    <div class="cars-list">
+        <div class="cars-list__item">
+            <div class="cars-list__image">
+                <img src="/upload/cars/sample.jpg" width="200">
+            </div>
+            <div class="cars-list__title">
+                <a href="{{ path('view_car', {id: 6}) }}">
+                    Audi A6
+                </a>
+            </div>
+        </div>
+    </div>
+
+    {#<table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Model</th>
+            <th>Created</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if paginator.count() %}
+            {% for car in paginator.getIterator() %}
+                <tr>
+                    <td>{{ car.id }}</td>
+                    <td>{{ car.title }}</td>
+                    <td>{{ car.brand.title }} {{ car.brandModel.title }}</td>
+                    <td>{{ car.createdAt|date('Y-m-d H:i') }}</td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="4">No data</td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>#}
+{% endblock %}
