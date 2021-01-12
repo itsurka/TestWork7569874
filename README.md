@@ -24,4 +24,16 @@
 
 ## Запуск проекта
 
-1. `yarn dev` или `yarn dev-watch`
+### vuejs
+
+1. `cd vue`
+2. `yarn` - установка пакетов
+3. `yarn dev` или `yarn dev-watch` - билд проекта
+4. `yarn build` - билд проекта для прома
+5. `yarn test` - запуск тестов
+
+### symfony
+
+1. `cd ../symfony`
+2. `composer install`
+3. `bin/console doctrine:migrations:migrate`
